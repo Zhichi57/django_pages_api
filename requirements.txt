@@ -1,0 +1,6 @@
+Django~=4.1
+djangorestframework~=3.13.1
+markdown~=3.4.1
+django-filter~=22.1
+celery~=5.2.7
+Redis~=4.3.4

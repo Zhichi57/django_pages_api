@@ -38,3 +38,6 @@ class Page(models.Model):
     videos = models.ManyToManyField(Video)
     audios = models.ManyToManyField(Audio)
     texts = models.ManyToManyField(Text)
+
+    def __str__(self):
+        return f"{self.title}"
