@@ -4,3 +4,6 @@ markdown~=3.4.1
 django-filter~=22.1
 celery~=5.2.7
 Redis~=4.3.4
+django-ordered-model~=3.6
+psycopg2~=2.9.3
+psycopg2-binary~=2.9.3
