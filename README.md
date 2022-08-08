@@ -63,4 +63,5 @@ docker-compose exec web python manage.py createsuperuser --noinput
 ```
 docker-compose restart web
 ```
-Список страниц будет доступен по адресу `http://127.0.0.1:8000/pages/`
+Список страниц будет доступен по адресу `http://127.0.0.1:8000/pages/`  
+Админка будет доступна по адресу `http://127.0.0.1:8000/admin/`
