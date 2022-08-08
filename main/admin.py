@@ -3,6 +3,7 @@ from ordered_model.admin import OrderedTabularInline, OrderedInlineModelAdminMix
 from main.models import *
 
 
+# Inline блок для контента типа текст
 class PageTextsTabularInline(OrderedTabularInline):
     model = PageTextThroughModel
     fields = ('text', 'order', 'move_up_down_links',)
@@ -11,6 +12,7 @@ class PageTextsTabularInline(OrderedTabularInline):
     extra = 1
 
 
+# Inline блок для контента типа аудио
 class PageAudiosTabularInline(OrderedTabularInline):
     model = PageAudiosThroughModel
     fields = ('audio', 'order', 'move_up_down_links',)
@@ -19,6 +21,7 @@ class PageAudiosTabularInline(OrderedTabularInline):
     extra = 1
 
 
+# Inline блок для контента типа видео
 class PageVideosTabularInline(OrderedTabularInline):
     model = PageVideosThroughModel
     fields = ('video', 'order', 'move_up_down_links',)
@@ -27,6 +30,7 @@ class PageVideosTabularInline(OrderedTabularInline):
     extra = 1
 
 
+# Изменение страницы редактирование модели Page
 class PageAdmin(OrderedInlineModelAdminMixin, admin.ModelAdmin):
     model = Page
     list_display = ('title',)

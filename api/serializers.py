@@ -2,24 +2,7 @@ from main.models import *
 from rest_framework import serializers
 
 
-class VideoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Video
-        fields = '__all__'
-
-
-class AudioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Audio
-        fields = '__all__'
-
-
-class TextSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Text
-        fields = '__all__'
-
-
+# Сериализатор для списка страниц
 class PageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Page
@@ -27,6 +10,7 @@ class PageSerializer(serializers.HyperlinkedModelSerializer):
         ordering = ['-id']
 
 
+# Сериализатор для списка контента типа текст
 class PageTextThroughSerializer(serializers.ModelSerializer):
     title = serializers.CharField(source='text.title')
     value = serializers.CharField(source='text.value')
@@ -37,6 +21,7 @@ class PageTextThroughSerializer(serializers.ModelSerializer):
         fields = ('title', 'value', 'counter')
 
 
+# Сериализатор для списка контента типа видео
 class PageVideosThroughSerializer(serializers.ModelSerializer):
     title = serializers.CharField(source='video.title')
     video_ulr = serializers.CharField(source='video.video_ulr')
@@ -48,6 +33,7 @@ class PageVideosThroughSerializer(serializers.ModelSerializer):
         fields = ('title', 'video_ulr', 'subtitles_ulr', 'counter')
 
 
+# Сериализатор для списка контента типа аудио
 class PageAudiosThroughSerializer(serializers.ModelSerializer):
     title = serializers.CharField(source='audio.title')
     bitrate = serializers.CharField(source='audio.bitrate')
@@ -58,6 +44,7 @@ class PageAudiosThroughSerializer(serializers.ModelSerializer):
         fields = ('title', 'bitrate', 'counter')
 
 
+# Сериализатор для подробной информации о странице
 class InfoPageSerializer(serializers.ModelSerializer):
     texts = serializers.SerializerMethodField()
     videos = serializers.SerializerMethodField()
@@ -67,14 +54,17 @@ class InfoPageSerializer(serializers.ModelSerializer):
         model = Page
         fields = ['title', 'videos', 'audios', 'texts']
 
+    # Получение упорядоченного списка контента типа текст
     def get_texts(self, obj):
         qset = PageTextThroughModel.objects.filter(page_id=obj)
         return [PageTextThroughSerializer(m).data for m in qset]
 
+    # Получение упорядоченного списка контента типа видео
     def get_videos(self, obj):
         qset = PageVideosThroughModel.objects.filter(page_id=obj)
         return [PageVideosThroughSerializer(m).data for m in qset]
 
+    # Получение упорядоченного списка контента типа аудио
     def get_audios(self, obj):
         qset = PageAudiosThroughModel.objects.filter(page_id=obj)
         return [PageAudiosThroughSerializer(m).data for m in qset]

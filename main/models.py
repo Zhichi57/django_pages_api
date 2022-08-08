@@ -2,6 +2,7 @@ from django.db import models
 from ordered_model.models import OrderedModel
 
 
+# Модель для контента типа "Видео"
 class Video(models.Model):
     class Meta:
         db_table = 'videos'
@@ -15,6 +16,7 @@ class Video(models.Model):
         return f"{self.title}"
 
 
+# Модель для контента типа "Аудио"
 class Audio(models.Model):
     class Meta:
         db_table = 'audios'
@@ -27,6 +29,7 @@ class Audio(models.Model):
         return f"{self.title}"
 
 
+# Модель для контента типа "Текст"
 class Text(models.Model):
     class Meta:
         db_table = 'texts'
@@ -39,6 +42,7 @@ class Text(models.Model):
         return f"{self.title}"
 
 
+# Модель для сущности "Страница"
 class Page(models.Model):
     class Meta:
         db_table = 'pages'
@@ -52,6 +56,7 @@ class Page(models.Model):
         return f"{self.title}"
 
 
+# Модель для связи сущности "Страница" с контентом типа "Текст"
 class PageTextThroughModel(OrderedModel):
     page = models.ForeignKey(Page, on_delete=models.CASCADE)
     text = models.ForeignKey(Text, on_delete=models.CASCADE)
@@ -64,6 +69,7 @@ class PageTextThroughModel(OrderedModel):
         return f"ID: {self.text.id}"
 
 
+# Модель для связи сущности "Страница" с контентом типа "Видео"
 class PageVideosThroughModel(OrderedModel):
     page = models.ForeignKey(Page, on_delete=models.CASCADE)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
@@ -76,6 +82,7 @@ class PageVideosThroughModel(OrderedModel):
         return f"ID: {self.video.id}"
 
 
+# Модель для связи сущности "Страница" с контентом типа "Аудио"
 class PageAudiosThroughModel(OrderedModel):
     page = models.ForeignKey(Page, on_delete=models.CASCADE)
     audio = models.ForeignKey(Audio, on_delete=models.CASCADE)
